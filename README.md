@@ -23,15 +23,19 @@ Example
 ```sh
 > java ChessSolver 3 3 K2 R1
 > 4
-> K#K
-> ###
-> #R#
-> K##
-> ##R
-> K##
-> ##K
-> R##
-> ##K
-> #R#
-> ###
-> K#K
+> K.K
+> ...
+> .R.
+> K..
+> ..R
+> K..
+> ..K
+> R..
+> ..K
+> .R.
+> ...
+> K.K
+
+Requirements
+============
+Java 8
