@@ -7,7 +7,7 @@ Usage
 =====
 
 ```sh
-javac ChessSolver.java
+javac -sourcepath src/java/ -d . src/java/ChessSolver.java
 java ChessSolver [-n] [board-width] [board-height] [list-of-figures]
 ```
 * **-n** output only combinations count, not combinations ifself
