@@ -50,4 +50,21 @@ public class PositionsCounterTest {
         boardPositions.retainAll(expectedBoardPositions);
         assertEquals(4, boardPositions.size());
     }
+
+    @Test
+    public void testCase2() {
+        Map<Figure, Integer> figures = new HashMap<>();
+        figures.put(Figure.ROOK, 2);
+        figures.put(Figure.KNIGHT, 4);
+        Set<BoardPosition> boardPositions = positionsCounter.countAllPositions(4, 4, figures);
+        assertEquals(8, boardPositions.size());
+    }
+
+    @Test
+    public void testCase8Queens() {
+        Map<Figure, Integer> figures = new HashMap<>();
+        figures.put(Figure.QUEEN, 8);
+        Set<BoardPosition> boardPositions = positionsCounter.countAllPositions(8, 8, figures);
+        assertEquals(92, boardPositions.size());
+    }
 }

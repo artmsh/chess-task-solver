@@ -36,14 +36,6 @@ public class BoardPosition {
 
             return true;
         }
-
-        @Override
-        public int hashCode() {
-            int result = figure != null ? figure.hashCode() : 0;
-            result = 31 * result + row;
-            result = 31 * result + column;
-            return result;
-        }
     }
 
     private int width, height;
@@ -81,14 +73,6 @@ public class BoardPosition {
 
         return figures.size() == that.figures.size() &&
                 figures.stream().allMatch(that.figures::contains);
-    }
-
-    @Override
-    public int hashCode() {
-        SortedSet<FigurePosition> positions =
-                new TreeSet<>((p1, p2) -> (p1.row * width + p1.column) - (p2.row * width + p2.column));
-        positions.addAll(figures);
-        return positions.hashCode();
     }
 
     @Override

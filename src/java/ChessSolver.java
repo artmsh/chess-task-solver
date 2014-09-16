@@ -29,34 +29,35 @@ public class ChessSolver {
                 argsStartIndex++;
             }
 
-            try {
-                Integer width = Integer.valueOf(args[argsStartIndex].trim());
-                Integer height = Integer.valueOf(args[argsStartIndex + 1].trim());
+            if (args.length >= argsStartIndex + 3) {
+                try {
+                    Integer width = Integer.valueOf(args[argsStartIndex].trim());
+                    Integer height = Integer.valueOf(args[argsStartIndex + 1].trim());
 
-                if (width <= 0 || height <= 0) {
-                    throw new RuntimeException("Board width and height should be non-zero positive");
-                }
+                    if (width <= 0 || height <= 0) {
+                        throw new RuntimeException("Board width and height should be non-zero positive");
+                    }
 
-                Map<Figure, Integer> figures = new HashMap<>();
-                for (int i = argsStartIndex + 2; i < args.length; i++) {
-                    String arg = args[i].trim();
-                    Figure figure = Figure.parseFigure(arg.charAt(0));
-                    if (figure == null) {
-                        System.err.println("Unrecognized figure: " + arg.charAt(0));
-                    } else {
-                        try {
-                            figures.put(figure, Integer.parseInt(arg.substring(1).trim()));
-                        } catch (NumberFormatException e) {
-                            System.err.println("Unrecognized figure count: " + e.getMessage());
+                    Map<Figure, Integer> figures = new HashMap<>();
+                    for (int i = argsStartIndex + 2; i < args.length; i++) {
+                        String arg = args[i].trim();
+                        Figure figure = Figure.parseFigure(arg.charAt(0));
+                        if (figure == null) {
+                            System.err.println("Unrecognized figure: " + arg.charAt(0));
+                        } else {
+                            try {
+                                figures.put(figure, Integer.parseInt(arg.substring(1).trim()));
+                            } catch (NumberFormatException e) {
+                                System.err.println("Unrecognized figure count: " + e.getMessage());
+                            }
                         }
                     }
+
+                    return new Arguments(onlyCombinationCount, width, height, figures);
+                } catch (NumberFormatException e) {
+                    throw new RuntimeException("Invalid format: " + e.getMessage());
                 }
-
-                return new Arguments(onlyCombinationCount, width, height, figures);
-            } catch (NumberFormatException e) {
-                throw new RuntimeException("Invalid format: " + e.getMessage());
-            }
-
+            } else showUsage();
         } else showUsage();
 
         return null;
@@ -72,7 +73,7 @@ public class ChessSolver {
             System.out.println(positions.size());
             if (!arguments.printOnlyCombinationCount) {
                 for (BoardPosition position : positions) {
-                    System.out.print(position);
+                    System.out.println(position);
                 }
             }
         } catch (RuntimeException e) {
